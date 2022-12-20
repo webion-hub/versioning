@@ -14,6 +14,6 @@ internal sealed class AppDbo
 
     public override string ToString()
     {
-        return $"{Major}.{Minor}.{BuildDate.Year}{BuildDate.DayOfYear}.{BuildCount}";
+        return $"{Major}.{Minor}.{BuildDate:yy}{BuildDate.DayOfYear}.{BuildCount}";
     }
 }
