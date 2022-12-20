@@ -8,10 +8,10 @@ using (var ctx = new VersioningDbContext())
 
 var rootCommand = new RootCommand();
 var listCommand = new ListCommand();
-var generateCommand = new GenerateCommand();
+var updateCommand = new UpdateCommand();
 
 
 rootCommand.AddCommand(listCommand);
-rootCommand.AddCommand(generateCommand);
+rootCommand.AddCommand(updateCommand);
 
 return await rootCommand.InvokeAsync(args);

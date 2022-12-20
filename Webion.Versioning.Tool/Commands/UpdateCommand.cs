@@ -1,18 +1,15 @@
 namespace Webion.Versioning.Commands;
 
-internal sealed class GenerateCommand : Command
+internal sealed class UpdateCommand : Command
 {
     private readonly Option<uint?> majorOption = new("--major");
     private readonly Option<uint?> minorOption = new("--minor");
-    private readonly Argument<string> nameArgument = new(
-        name: "App name",
-        description: "The app name"
-    );
+    private readonly Argument<string> nameArgument = new("App name");
 
 
-    public GenerateCommand() : base(
-        name: "gen",
-        description: "Generate a new app version"
+    public UpdateCommand() : base(
+        name: "u",
+        description: "Update an app version"
     )
     {
         AddArgument(nameArgument);
