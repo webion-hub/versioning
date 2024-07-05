@@ -11,7 +11,6 @@ public sealed class AppDbo : IEntityTypeConfiguration<AppDbo>
     public uint Minor { get; set; }
     public DateTimeOffset BuildDate { get; set; }
     public uint BuildCount { get; set; }
-    public string UniqueId { get; set; } = null!;
 
     public void Configure(EntityTypeBuilder<AppDbo> builder)
     {
@@ -22,7 +21,6 @@ public sealed class AppDbo : IEntityTypeConfiguration<AppDbo>
         builder.Property(x => x.Minor).IsRequired();
         builder.Property(x => x.BuildDate).IsRequired();
         builder.Property(x => x.BuildCount).IsRequired();
-        builder.Property(x => x.UniqueId).IsRequired();
     }
 
     public override string ToString()
@@ -32,6 +30,6 @@ public sealed class AppDbo : IEntityTypeConfiguration<AppDbo>
 
     public string GetVersion()
     {
-        return $"{Major}.{Minor}.{BuildDate:yy}{BuildDate.DayOfYear}.{BuildCount}.{UniqueId}";
+        return $"{Major}.{Minor}.{BuildCount}.{BuildDate:yy}{BuildDate.DayOfYear}.{BuildDate:HHmmss}";
     }
 }

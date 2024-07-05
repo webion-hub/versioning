@@ -1,5 +1,4 @@
 using CliWrap;
-using HashidsNet;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -31,7 +30,6 @@ internal sealed class IncrementCommand : AsyncCommand<IncrementCommandSettings>
 
         app.BuildCount = GetBuildCount(app, settings.Major, settings.Minor);
         app.BuildDate = DateTimeOffset.UtcNow;
-        app.UniqueId = new Hashids().Encode(Random.Shared.Next());
 
         app.Major = settings.Major ?? app.Major;
         app.Minor = settings.Minor ?? app.Minor;

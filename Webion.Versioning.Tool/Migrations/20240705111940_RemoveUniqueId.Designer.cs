@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Webion.Versioning.Tool.Contexts;
 
@@ -10,9 +11,11 @@ using Webion.Versioning.Tool.Contexts;
 namespace Webion.Versioning.Tool.Migrations
 {
     [DbContext(typeof(VersioningDbContext))]
-    partial class VersioningDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240705111940_RemoveUniqueId")]
+    partial class RemoveUniqueId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
