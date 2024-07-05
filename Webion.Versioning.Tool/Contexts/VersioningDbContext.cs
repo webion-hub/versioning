@@ -1,13 +1,25 @@
-namespace Webion.Versioning.Contexts;
+using Webion.Versioning.Tool.Data;
 
-internal sealed class VersioningDbContext : DbContext
+namespace Webion.Versioning.Tool.Contexts;
+
+public sealed class VersioningDbContext : DbContext
 {
     public DbSet<AppDbo> Apps { get; set; } = null!;
 
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(VersioningDbContext).Assembly);
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
-        Directory.CreateDirectory("~/wv");
-        builder.UseSqlite("Filename=~/wv/db.sqlite");
+        var home = Environment.SpecialFolder.UserProfile;
+        var baseDir = $"{home}/wv";
+        
+        Directory.CreateDirectory(baseDir);
+        builder.UseSqlite($"Filename={baseDir}/db.sqlite");
     }
 }

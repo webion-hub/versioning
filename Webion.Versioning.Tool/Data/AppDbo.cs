@@ -1,16 +1,27 @@
-namespace Webion.Versioning.Data;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-internal sealed class AppDbo
+namespace Webion.Versioning.Tool.Data;
+
+public sealed class AppDbo : IEntityTypeConfiguration<AppDbo>
 {
-    [Key]
-    [Required]
     public required string Name { get; set; }
 
-    [Required] public uint Major { get; set; } = 1;
-    [Required] public uint Minor { get; set; } = 0;
-    [Required] public DateOnly BuildDate { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
-    [Required] public uint BuildCount { get; set; } = 0;
+    public uint Major { get; set; } = 1;
+    public uint Minor { get; set; }
+    public DateTimeOffset BuildDate { get; set; }
+    public uint BuildCount { get; set; }
 
+
+    public void Configure(EntityTypeBuilder<AppDbo> builder)
+    {
+        builder.ToTable("apps");
+        builder.HasKey(x => x.Name);
+
+        builder.Property(x => x.Major).IsRequired();
+        builder.Property(x => x.Minor).IsRequired();
+        builder.Property(x => x.BuildDate).IsRequired();
+        builder.Property(x => x.BuildCount).IsRequired();
+    }
 
     public override string ToString()
     {
