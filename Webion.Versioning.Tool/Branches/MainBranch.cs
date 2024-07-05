@@ -9,8 +9,11 @@ public sealed class MainBranch : IBranchConfig
     public void Configure(IConfigurator config)
     {
         config.AddCommand<IncrementCommand>("incr")
-            .WithAlias("increment");
+            .WithAlias("increment")
+            .WithDescription("Increments an application's version");
 
-        config.AddCommand<ListVersionsCommand>("list");
+        config.AddCommand<ListVersionsCommand>("list")
+            .WithAlias("ls")
+            .WithDescription("Lists all current applications with their respective version");
     }
 }

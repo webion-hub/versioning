@@ -16,8 +16,8 @@ public sealed class VersioningDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
-        var home = Environment.SpecialFolder.UserProfile;
-        var baseDir = $"{home}/wv";
+        var home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        var baseDir = $"{home}/.wv";
         
         Directory.CreateDirectory(baseDir);
         builder.UseSqlite($"Filename={baseDir}/db.sqlite");

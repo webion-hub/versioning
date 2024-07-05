@@ -12,9 +12,8 @@ using Webion.Versioning.Tool.Managers.Files;
 
 await using (var db = new VersioningDbContext())
 {
-    await db.Database.EnsureCreatedAsync();
+    await db.Database.MigrateAsync();
 }
-
 
 var config = new ConfigurationBuilder()
     .AddCommandLine(args)
