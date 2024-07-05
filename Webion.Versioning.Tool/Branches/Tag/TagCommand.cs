@@ -26,14 +26,34 @@ public sealed class TagCommand : AsyncCommand<TagCommandSettings>
             AnsiConsole.MarkupLine(Msg.Err($"No app found with name {settings.AppName}"));
             return 1;
         }
-        
-        var result = await Cli.Wrap("git")
-            .WithArguments(["tag", app.GetVersion()])
+
+        var git = Cli.Wrap("git")
             .WithStandardOutputPipe(PipeTarget.ToDelegate(x => AnsiConsole.MarkupLine(Msg.Ok(x))))
             .WithStandardErrorPipe(PipeTarget.ToDelegate(x => AnsiConsole.MarkupLine(Msg.Err(x))))
-            .WithValidation(CommandResultValidation.None)
+            .WithValidation(CommandResultValidation.None);
+        
+        var tagResult = await git
+            .WithArguments(["tag", app.GetVersion()])
             .ExecuteAsync(_lifetime.CancellationToken);
 
-        return result.ExitCode;
+        if (tagResult.ExitCode is not 0)
+        {
+            AnsiConsole.MarkupLine(Msg.Err("Could not tag the current commit"));
+            return tagResult.ExitCode;
+        }
+        
+        AnsiConsole.MarkupLine(Msg.Ok($"Commit tagged -> [b]{app.GetVersion()}[/]"));
+
+        var pushResult = await git
+            .WithArguments(["push", "origin", "tag", app.GetVersion()])
+            .ExecuteAsync(_lifetime.CancellationToken);
+        
+        if (tagResult.ExitCode is not 0)
+        {
+            AnsiConsole.MarkupLine(Msg.Err($"Could not push tag {app.GetVersion()}"));
+            return tagResult.ExitCode;
+        }
+        
+        return pushResult.ExitCode;
     }
 }
