@@ -1,4 +1,3 @@
-using CliWrap;
 using HashidsNet;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console;

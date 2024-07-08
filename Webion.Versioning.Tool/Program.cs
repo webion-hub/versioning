@@ -44,8 +44,8 @@ app.Configure(o =>
     var fullErrors = config.GetValue("full-errors", false);
     if (fullErrors)
         o.PropagateExceptions();
-    
-    o.SetApplicationVersion("0.1-beta");
+
+    o.UseAssemblyInformationalVersion();
     o.AddBranch<MainBranch>();
 });
 
