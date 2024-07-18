@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Webion.Versioning.Tool.Data;
@@ -33,6 +32,6 @@ public sealed class AppDbo : IEntityTypeConfiguration<AppDbo>
 
     public string GetVersion()
     {
-        return $"{Major}.{Minor}.{BuildCount}-{BuildDate:yy}{BuildDate.DayOfYear}.{BuildDate:HHmmss}.{UniqueId}";
+        return $"{Major}.{Minor}.{BuildDate:yy}{BuildDate.DayOfYear}.{BuildCount}-{BuildDate:HHmmss}-{UniqueId}";
     }
 }
