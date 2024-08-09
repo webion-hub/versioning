@@ -24,4 +24,7 @@ public sealed class IncrementCommandSettings : CommandSettings
     
     [CommandOption("--lang")]
     public FileLanguage Lang { get; init; }
+    
+    [CommandOption("--format")]
+    public string? Format { get; init; }
 }

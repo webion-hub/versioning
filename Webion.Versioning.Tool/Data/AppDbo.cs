@@ -30,8 +30,26 @@ public sealed class AppDbo : IEntityTypeConfiguration<AppDbo>
         return GetVersion();
     }
 
-    public string GetVersion()
+    
+    private const string DefaultFormat = "{major}.{minor}.{buildDate:yy}{dayOfYear}.{buildCount}-{buildDate:HHmmss}-{uniqueId}";
+    
+    public string GetVersion(string? format = null)
     {
-        return $"{Major}.{Minor}.{BuildDate:yy}{BuildDate.DayOfYear}.{BuildCount}-{BuildDate:HHmmss}-{UniqueId}";
+        var fmt = (format ?? DefaultFormat)
+            .Replace("major", "0")
+            .Replace("minor", "1")
+            .Replace("buildDate", "2")
+            .Replace("dayOfYear", "3")
+            .Replace("buildCount", "4")
+            .Replace("uniqueId", "5");
+        
+        return string.Format(fmt,
+            Major,
+            Minor,
+            BuildDate,
+            BuildDate.DayOfYear,
+            BuildCount,
+            UniqueId
+        );
     }
 }

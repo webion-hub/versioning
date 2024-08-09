@@ -23,7 +23,7 @@ public sealed class ListVersionsCommand : AsyncCommand<ListVersionsCommandSettin
         table.AddColumns("App", "Version");
         
         foreach (var app in apps)
-            table.AddRow(app.Name, app.ToString());
+            table.AddRow(app.Name, app.GetVersion());
         
         AnsiConsole.Write(table);
         return 0;

@@ -43,7 +43,7 @@ internal sealed class IncrementCommand : AsyncCommand<IncrementCommandSettings>
         
         await transaction.CommitAsync(_lifetime.CancellationToken);
         
-        AnsiConsole.MarkupLine(Msg.Ok($"[blue]{settings.AppName}[/] -> [b]{app.GetVersion()}[/]"));
+        AnsiConsole.MarkupLine(Msg.Ok($"[blue]{settings.AppName}[/] -> [b]{app.GetVersion(settings.Format)}[/]"));
         return 0;
     }
     
@@ -91,7 +91,7 @@ internal sealed class IncrementCommand : AsyncCommand<IncrementCommandSettings>
         var done = await fileManager.WriteAsync(
             file: settings.File,
             path: settings.Path,
-            version: app.ToString(),
+            version: app.GetVersion(settings.Format),
             cancellationToken: _lifetime.CancellationToken
         );
         
