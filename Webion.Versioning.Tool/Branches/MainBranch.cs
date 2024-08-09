@@ -1,4 +1,5 @@
 using Spectre.Console.Cli;
+using Webion.Versioning.Tool.Branches.Get;
 using Webion.Versioning.Tool.Branches.Increment;
 using Webion.Versioning.Tool.Branches.List;
 using Webion.Versioning.Tool.Branches.Tag;
@@ -19,5 +20,8 @@ public sealed class MainBranch : IBranchConfig
         
         config.AddCommand<TagCommand>("tag")
             .WithDescription("Tags the current git commit with the latest app version");
+
+        config.AddCommand<GetCommand>("get")
+            .WithDescription("Get the version associated with the given app name. Useful for scripts.");
     }
 }
