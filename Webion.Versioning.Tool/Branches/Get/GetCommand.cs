@@ -25,7 +25,7 @@ public sealed class GetCommand : AsyncCommand<GetCommandSettings>
         if (app is null)
             return -1;
         
-        AnsiConsole.WriteLine(app.GetVersion());
+        AnsiConsole.WriteLine(app.GetVersion(settings.Format));
         return 0;
     }
 }
