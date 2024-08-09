@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>12</LangVersion>
-    <Version>1.0.24216.9-133704-KOWOoRz</Version>
+    <Version>1.0.24222.4-114455-zrnKPO</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CliWrap" Version="3.6.6" />
